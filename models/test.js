@@ -30,6 +30,21 @@ class Test {
             }
         }
     }
+
+    static async search_user(email){
+        try {
+            const data = await query('SELECT * FROM users WHERE email = ?',[email]);
+            return {
+                success: true,
+                data
+            }
+        } catch (error) {
+            return {
+                success: false,
+                error
+            }
+        }
+    }
 }
 
 module.exports = Test
