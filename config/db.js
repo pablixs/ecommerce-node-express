@@ -21,7 +21,7 @@ function query(sql,data){
                     message:error.sqlMessage
                 })
             }else{
-                return resolve(result)
+                return resolve(result, fields)
             }
         })
     })

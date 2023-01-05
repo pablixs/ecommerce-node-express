@@ -34,6 +34,10 @@ class Test {
     static async search_user(email){
         try {
             const data = await query('SELECT * FROM users WHERE email = ?',[email]);
+            if (data.length === 0) return {
+                success: false,
+                error: 'No se encontró un usuario con ese email'
+            }
             return {
                 success: true,
                 data
