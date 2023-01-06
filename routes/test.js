@@ -1,10 +1,12 @@
 const express = require('express');
 const router = express.Router();
+const cookie = require('cookie-parser');
 
-const query = require('../models/Test')
+const query = require('../models/users/UserManagment_model.js')
 const { hashSync, compareSync } = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
+const { v4: uuidv4 } = require('uuid')
 
 router.use(passport.initialize());
 
@@ -20,17 +22,28 @@ router.get('/', async (req ,res) => {
 })
 
 router.post('/newuser', async(req,res) => {
-    const { email, password } = req.body;
+    const { email, password, phone, first_name, last_name } = req.body;
+
+    const guid = uuidv4();
 
     console.log(email, password);
+
     const passwordHash = hashSync(password, 10)
 
     const new_user = {
+        guid,
         email,
-        password: passwordHash
+        password: passwordHash,
+        phone,
+        first_name,
+        last_name
     }
 
-    const { success, data, error } = await query.new_user(new_user.email, new_user.password);
+    const keys = Object.keys(new_user)
+    const values = Object.values(new_user)
+
+    // const { success, data, error } = await query.new_user(new_user.guid,new_user.email, new_user.password, new_user.phone, new_user.first_name, new_user.last_name);
+    const { success, data, error } = await query.new_user(keys, values);
  
     if (success) {
         res.send(data)
@@ -61,8 +74,10 @@ router.post('/login', async (req,res) => {
 
         console.log(`This is the payload: ${payload}`)
 
-        const token = jwt.sign(payload, "Mega secret", { expiresIn: "1d"})
+        const token = jwt.sign(payload, "Mega secret", { expiresIn: "1d"});
 
+        res.cookie('jwt', token);
+        console.log(req.cookies);
         return res.status(200).send({
             success: true,
             message: 'Logged in successfully',
@@ -76,7 +91,8 @@ router.post('/login', async (req,res) => {
 });
 
 router.get('/profile', passport.authenticate('jwt', {session : false}),async(req,res) =>{
-
+    console.log(req.user)
+    res.send({"message":"Done"})
 })
 
 module.exports = router;

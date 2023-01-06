@@ -32,7 +32,7 @@ connection.connect (
         if(!err){
             console.log('Conexion establecida')
         } else {
-            console.log('Error de conexion')
+            console.log('Error de conexion',err)
         }
     }
 );

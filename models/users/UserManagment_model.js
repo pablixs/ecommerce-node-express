@@ -1,6 +1,6 @@
-const { query } = require('../config/db')
+const { query } = require('../../config/db')
 
-class Test {
+class UserManagment {
     static async users_list(){
         try {
             const data = await query('SELECT * FROM users');
@@ -16,9 +16,9 @@ class Test {
         }
     }
 
-    static async new_user(email,password){
+    static async new_user(keys, values){
         try {
-            const data = await query('INSERT INTO users(`name`,`password`,`email`) VALUES (?,?,?)',['Pruebinha',password, email])
+            const data = await query(`INSERT INTO users (${keys.join(', ')}) VALUES (?)`,[values])
             return {
                 success: true,
                 data
@@ -51,4 +51,4 @@ class Test {
     }
 }
 
-module.exports = Test
+module.exports = UserManagment
