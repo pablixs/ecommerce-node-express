@@ -3,7 +3,6 @@ const JwtStrategy = require('passport-jwt').Strategy,
 const opts = {}
 const passport = require('passport');
 // const cookie = require('cookie-parser');
-
 const fromCookie = (req) => {
     return req.cookies.jwt;
 }
