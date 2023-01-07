@@ -1,12 +1,15 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 
-var indexRouter = require('./routes/index.routes');
-var profileRouter = require('./routes/users_routes/users.routes');
-const productsRouter = require('./routes/products_routes/products.routes')
+const index_router = require('./routes/index.routes');
+const user_router = require('./routes/users_routes/users.routes');
+const products_router = require('./routes/products_routes/products.routes');
+const cart_router = require('./routes/cart.routes');
+
+//* dev
 const testRouter = require('./routes/test');
 
 var app = express();
@@ -21,9 +24,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/perfil', profileRouter);
-app.use('/productos', productsRouter);
+app.use('/', index_router);
+app.use('/perfil', user_router);
+app.use('/productos', products_router);
+app.use('/carrito', cart_router);
 //* dev
 app.use('/api', testRouter);
 
