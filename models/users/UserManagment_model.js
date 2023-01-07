@@ -68,6 +68,25 @@ class UserManagment {
             }
         }
     }
+    
+    static async search_user_by_id(id){
+        try {
+            const data = await query('SELECT * FROM users WHERE id = ? LIMIT 1',[id]);
+            if (data.length === 0) return {
+                success: false,
+                error: 'No se encontró un usuario con ese email'
+            }
+            return {
+                success: true,
+                data
+            }
+        } catch (error) {
+            return {
+                success: false,
+                error
+            }
+        }
+    }
 }
 
 module.exports = UserManagment
