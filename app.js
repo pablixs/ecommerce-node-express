@@ -7,7 +7,7 @@ const logger = require('morgan');
 const index_router = require('./routes/index.routes');
 const user_router = require('./routes/users_routes/users.routes');
 const products_router = require('./routes/products_routes/products.routes');
-const cart_router = require('./routes/cart.routes');
+const cart_router = require('./routes/carrito.routes');
 
 //* dev
 const testRouter = require('./routes/test');

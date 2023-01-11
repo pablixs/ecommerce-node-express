@@ -2,12 +2,12 @@
 //** data & error from the return of the promise of the query, 
 //** handle it and resolve
 
-function handleQueryResult(success, data, error) {
-    if(success){
-        console.log(success)
-        return data;
+function handleQueryResult(success, data, error, res) {
+    if(success === undefined || !success){
+        res.status(404).send('Error!!');
+        return;
     } else {
-        return error;
+        return data;
     }
 }
 

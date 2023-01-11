@@ -20,37 +20,41 @@ class Products {
     }
 
     static async category(req, res) {
-        const {
-            success,
-            data: categories,
-            error
-        } = await Products_model.get_categories()
-
-        const query_category = req.params.category;
-
-        const categorias = handleQueryResult(success, categories, error);
-
-        console.log(categorias);
-
-
-        const coincidences = categorias.findIndex(categorias => categorias.name === query_category);
-        if (coincidences !== -1) {
+        try {
             const {
-                success: newSuccess,
-                data: products,
-                error: newError
-            } = await Products_model.get_product_by_category(categories[coincidences].id)
-
-            const products_handled = handleQueryResult(newSuccess, products, newError);
-            res.send({
-                'Esta es la categoria que coincide': categories[coincidences],
-                'Estos son los productos que coinciden con la categoria': products_handled
-            })
-
-        } else {
-            res.send({
-                "message": "No hubo categorias con ese nombre"
-            })
+                success,
+                data: categories,
+                error
+            } = await Products_model.get_categories()
+    
+            const query_category = req.params.category;
+    
+            const categorias = handleQueryResult(success, categories, error);
+    
+            console.log(categorias);
+    
+    
+            const coincidences = categorias.findIndex(categorias => categorias.name === query_category);
+            if (coincidences !== -1) {
+                const {
+                    success: newSuccess,
+                    data: products,
+                    error: newError
+                } = await Products_model.get_product_by_category(categories[coincidences].id)
+    
+                const products_handled = handleQueryResult(newSuccess, products, newError);
+                res.send({
+                    'Esta es la categoria que coincide': categories[coincidences],
+                    'Estos son los productos que coinciden con la categoria': products_handled
+                })
+    
+            } else {
+                res.send({
+                    "message": "No hubo categorias con ese nombre"
+                })
+            }
+        } catch (error) {
+            res.sendStatus(404)
         }
     }
 
@@ -99,6 +103,7 @@ class Products {
             }
 
         } catch (error) {
+            console.log(error)
             res.status(404).send(error)
         }
     }

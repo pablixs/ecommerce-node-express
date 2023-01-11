@@ -2,7 +2,7 @@ require('dotenv').config()
 
 const mysql = require('mysql2')
 
-const connection = mysql.createConnection({
+const pool = mysql.createPool({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
@@ -12,7 +12,7 @@ const connection = mysql.createConnection({
 
 function query(sql,data){
     return new Promise(function (resolve,reject){
-        connection.query(sql,data,function(error,result,fields){
+        pool.query(sql,data,function(error,result,fields){
             if(error!=null){
                 console.log(error)
     
@@ -27,17 +27,17 @@ function query(sql,data){
     })
 }
 
-connection.connect (
-    (err)=>{
-        if(!err){
-            console.log('Conexion establecida')
-        } else {
-            console.log('Error de conexion',err)
-        }
+pool.getConnection((err,connection) => {
+    if(!err){
+        console.log('Conexion establecida');
+        connection.release();
+    } else {
+        console.log(`Error al establecer conexión: ${err}`)
     }
-);
+})
+
+
 
 module.exports = {
-    connection,
     query
 }
