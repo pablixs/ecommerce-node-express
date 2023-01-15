@@ -21,7 +21,6 @@ function detect_product_in_the_cart(cart, product_id){
 function add_if_is_in_cart(cart, product){
     for(let i = 0; i < cart.length; i++){
         if (cart[i].product_id === product.product_id){
-            console.log('hubo coincidencia')
             let add_new = {
                 product_id: product.product_id,
                 product_name: product.product_name,
@@ -48,7 +47,7 @@ function calculate_amount(cart) {
 async function detect_stock(product){
     const { success, data:product_from_db, error } = await Product_model.get_product_by_id(product.product_id);
     if(success){
-        if (product_from_db[0].stock >= product.product_quantity) {
+        if (product.product_quantity <= product_from_db[0].stock) {
             return true;
         }
         return false;

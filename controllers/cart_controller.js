@@ -55,23 +55,16 @@ class Cart {
             if (last_cart[0].products !== null) {
                 cart = (JSON.parse(last_cart[0].products));
             }
-            console.log('Primer estado del carrito :')
-            console.log(cart)
-            console.log('Primer estado del carrito :')
 
             //** starting to work with the new objects to add to the cart */
 
             let product = req.body;
-            console.log('aca' + cart.length)
-            // console.log(product)
-            //* Todavia no anda xd
-            if(await cart_helper.detect_stock(product)){
+
+            if (await cart_helper.detect_stock(product) !== true) {
                 return res.status(404).send('No hay stock de ese producto')
             }
 
-            //* final stage of the cart
             if (await !cart_helper.is_product_in_cart(cart, product.product_id)) {
-                console.log('No estaba en el carrito ese producto')
                 product.product_price *= product.product_quantity;
                 cart.push(product)
             } else {
@@ -90,17 +83,21 @@ class Cart {
             console.log(cart)
 
             const {
-                success: third_sccess,
+                success: third_success,
                 data: response,
                 error: third_error
             } = await User_model.add_to_cart_by_user_id(cart, amount, user[0].id)
 
-            console.log(response)
+            if (third_success) {
+                console.log(response)
 
-            res.send({
-                user,
-                product
-            })
+                return res.send({
+                    user,
+                    product
+                })
+            } else {
+                res.status(404).send('Algo salió mal')
+            }
         } catch (error) {
             console.log(error)
             res.send({
@@ -131,7 +128,7 @@ class Cart {
                 error
             } = await User_model.get_cart_by_user_id(user[0].id);
 
-            if(isNaN(product_id_q) || isNaN(product_quantity_q)) return res.status(404).send('Introduce caracteres validos')
+            if (isNaN(product_id_q) || isNaN(product_quantity_q)) return res.status(404).send('Introduce caracteres validos')
 
             if (success) {
                 if (last_cart[0].products === null || last_cart[0].products.length <= 0) {
