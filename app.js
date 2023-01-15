@@ -3,11 +3,13 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const helmet =  require('helmet');
 
 const index_router = require('./routes/index.routes');
 const user_router = require('./routes/users_routes/users.routes');
 const products_router = require('./routes/products_routes/products.routes');
 const cart_router = require('./routes/carrito.routes');
+const payments_router = require('./routes/payment.routes');
 
 //* dev
 const testRouter = require('./routes/test');
@@ -18,6 +20,7 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+app.use(helmet())
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -28,6 +31,7 @@ app.use('/', index_router);
 app.use('/perfil', user_router);
 app.use('/productos', products_router);
 app.use('/carrito', cart_router);
+app.use('/pagar', payments_router)
 //* dev
 app.use('/api', testRouter);
 

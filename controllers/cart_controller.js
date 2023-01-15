@@ -64,9 +64,13 @@ class Cart {
             let product = req.body;
             console.log('aca' + cart.length)
             // console.log(product)
+            //* Todavia no anda xd
+            if(await cart_helper.detect_stock(product)){
+                return res.status(404).send('No hay stock de ese producto')
+            }
 
             //* final stage of the cart
-            if (!cart_helper.is_product_in_cart(cart, product.product_id)) {
+            if (await !cart_helper.is_product_in_cart(cart, product.product_id)) {
                 console.log('No estaba en el carrito ese producto')
                 product.product_price *= product.product_quantity;
                 cart.push(product)

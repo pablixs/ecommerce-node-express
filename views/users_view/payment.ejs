@@ -1,0 +1,8 @@
+<%- include('../templates/nav.ejs')  %> 
+<form action="/pagar/mercadopago" method="post">
+    <input type="text" name="title" placeholder="title">
+    <input type="number" name="unit_price" placeholder="unit price">
+    <input type="number" name="quantity" placeholder="quantity">
+    <button type="submit">enviar</button>
+</form>
+<%- include('../templates/footer.ejs')  %> 

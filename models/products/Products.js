@@ -43,7 +43,6 @@ class Products {
         }
     }
 
-
     static async new_product(name, short_description, category_id, stock, price) {
         const convert = () => {
             return name.toLowerCase().replace(/[á]/g, 'a').replace(/[é]/g, 'e').replace(/[í]/g, 'i').replace(/[ó]/g, 'o').replace(/[ú]/g, 'u').replace(/[\s]/g, '-').replace(/[^\w ]+/g, '-');

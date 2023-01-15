@@ -1,3 +1,5 @@
+const Product_model = require('../models/products/Products')
+
 function is_product_in_cart(cart, product_id) {
     for (let i = 0; i < cart.length; i++) {
         if (cart[i].product_id === product_id) {
@@ -33,7 +35,6 @@ function add_if_is_in_cart(cart, product){
     }
 }
 
-
 function calculate_amount(cart) {
     amount = 0;
     for (let i = 0; i < cart.length; i++) {
@@ -43,10 +44,22 @@ function calculate_amount(cart) {
     }
     return amount;
 }
-
+//* Return true or fale
+async function detect_stock(product){
+    const { success, data:product_from_db, error } = await Product_model.get_product_by_id(product.product_id);
+    if(success){
+        if (product_from_db[0].stock >= product.product_quantity) {
+            return true;
+        }
+        return false;
+    } else {
+        return false;
+    }
+}
 
 // module.exports = is_product_in_cart, calculate_amount;
 exports.is_product_in_cart = is_product_in_cart;
 exports.calculate_amount = calculate_amount;
 exports.add_if_is_in_cart = add_if_is_in_cart;
 exports.detect_product_in_the_cart = detect_product_in_the_cart;
+exports.detect_stock = detect_stock;
