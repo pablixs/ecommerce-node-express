@@ -4,7 +4,7 @@ const opts = {}
 const passport = require('passport');
 // const cookie = require('cookie-parser');
 const fromCookie = (req) => {
-    return req.cookies.jwt;
+    return req.cookies.jwt
 }
 
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
@@ -13,11 +13,12 @@ opts.secretOrKey = 'Mega secret';
 
 const user_find = require('../models/users/UserManagment_model');
 
+
 passport.use(new JwtStrategy(opts, async function(jwt_payload, done) {
     const { success, data:user, error } = await user_find.search_user(jwt_payload.email);
     // User.findOne({id: jwt_payload.sub}, function(err, user) {
         if (!success) {
-            return done(error, false);
+            return done(null, false);
         }
         if (success) {
             return done(null, user);

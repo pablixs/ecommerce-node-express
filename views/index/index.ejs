@@ -1,3 +1,172 @@
-<%- include('../templates/nav.ejs')  %> 
-<h1>Welcome to index</h1>
-<%- include('../templates/footer.ejs')  %> 
+<%- include('../templates/nav.ejs') %>
+
+    <!--! Hero-->
+    <section>
+        <div class="px-4 py-12 mx-auto max-w-7xl sm:px-6 md:px-12 lg:px-24 lg:py-24">
+            <div class="flex flex-wrap items-center mx-auto max-w-7xl">
+                <div class="w-full lg:max-w-lg lg:w-1/2 rounded-xl">
+                    <div>
+                        <div class="relative w-full max-w-lg">
+                            <div
+                                class="absolute top-0 rounded-full bg-primary -left-4 w-72 h-72 mix-blend-multiply filter blur-xl opacity-70 animate-blob">
+                            </div>
+
+                            <div
+                                class="absolute rounded-full bg-warning -bottom-24 right-20 w-72 h-72 mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000">
+                            </div>
+                            <div class="relative">
+                                <img class="object-cover object-center mx-auto rounded-lg shadow-2xl" alt="hero"
+                                    src="./images/bg.png">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="flex flex-col items-start mt-12 mb-16 text-left lg:flex-grow lg:w-1/2 lg:pl-6 xl:pl-24 md:mb-0 xl:mt-0">
+                    <span class="mb-8 text-xs font-bold tracking-widest text-primary uppercase"> Bouvier Artesanal
+                    </span>
+                    <h1
+                        class="mb-8 text-4xl font-bold leading-none tracking-tighter text-neutral-600 md:text-7xl lg:text-5xl">
+                        Descubrí la belleza <span class="underline bg-warning bg-opacity-20">natural</span> de nuestra <span class="underline bg-warning bg-opacity-20">cosmética</span>.</h1>
+                    <p class="mb-8 text-base leading-relaxed text-left text-gray-500">Desde Bouvier Artesanal, creemos
+                        en la belleza natural y en los beneficios que la cosmética artesanal puede aportar a tu piel.
+                        Nuestros productos están elaborados con ingredientes naturales y orgánicos, cuidadosamente
+                        seleccionados para proporcionar resultados visibles y duraderos.</p>
+                    <div class="flex-col mt-0 max-w-7xl sm:flex">
+                        <div class="prose prose-md">
+                            <ul>
+                                <li class="text-gray-500">Productos libres de crueldad animal.</li>
+                                <li class="text-gray-500">Sin colágeno ni conservantes.</li>
+                                <li class="text-gray-500">Productos sin siliconas ni parabenos.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section>
+        <div class="max-w-screen-xl px-4 py-8 mx-auto sm:px-6 sm:py-12 lg:px-8">
+          <header class="text-center">
+            <h2 class="text-xl font-bold text-gray-900 sm:text-3xl">
+              Nuestras categorías de productos
+            </h2>
+      
+            <p class="max-w-md mx-auto mt-4 text-gray-500">
+              Desde Jabones hasta Serums faciales, encontrá lo que buscas en nuestra tienda.
+            </p>
+          </header>
+      
+          <ul class="grid grid-cols-1 gap-4 mt-8 lg:grid-cols-3">
+            <li>
+              <a href="#" class="relative block group">
+                <img
+                  src="./images/bg03.jpg"
+                  alt=""
+                  class="object-cover w-full transition duration-500 aspect-square group-hover:opacity-90"
+                />
+      
+                <div
+                  class="absolute inset-0 flex flex-col items-start justify-end p-6"
+                >
+                  <h3 class="text-xl font-medium text-white">Jabones</h3>
+      
+                  <span
+                    class="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium uppercase tracking-wide text-white"
+                  >
+                    Ver productos
+                  </span>
+                </div>
+              </a>
+            </li>
+      
+            <li>
+              <a href="#" class="relative block group">
+                <img
+                  src="./images/bg02.jpg"
+                  alt=""
+                  class="object-cover w-full transition duration-500 aspect-square group-hover:opacity-90"
+                />
+      
+                <div
+                  class="absolute inset-0 flex flex-col items-start justify-end p-6"
+                >
+                  <h3 class="text-xl font-medium text-white">Serums faciales</h3>
+      
+                  <span
+                    class="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium uppercase tracking-wide text-white"
+                  >
+                    Ver productos
+                  </span>
+                </div>
+              </a>
+            </li>
+      
+            <li class="lg:col-span-2 lg:col-start-2 lg:row-span-2 lg:row-start-1">
+              <a href="#" class="relative block group">
+                <img
+                  src="./images/product.png"
+                  alt=""
+                  class="object-cover w-full transition duration-500 aspect-square group-hover:opacity-90"
+                />
+      
+                <div
+                  class="absolute inset-0 flex flex-col items-start justify-end p-6"
+                >
+                  <h3 class="text-xl font-medium text-white">Todas las categorias: </h3>
+      
+                  <span
+                    class="mt-1.5 inline-block bg-black px-5 py-3 text-xs font-medium uppercase tracking-wide text-white"
+                  >
+                    VER
+                  </span>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </section>
+      
+
+    <!--! Category Products-->
+    <section class="bg-base-100">
+            <div class="relative items-center w-full px-5 py-12 mx-auto md:px-12 lg:px-24 max-w-7xl">
+            <div class="flex justify-between ml-4 text-3xl mt-12 underline ">
+                <h2 class="bg-warning bg-opacity-25 mb-6">Algunos de nuestros productos</h2>
+            </div>
+            <ul class="grid w-full grid-cols-1 gap-6 mx-auto lg:grid-cols-3">
+                <% for( let i = 0; i < some_products.length; i++) { %> 
+
+                    <a href="#" class="block group">
+                        <img
+                          src="./images/bg02.jpg"
+                          alt=""
+                          class="h-[350px] w-full object-cover sm:h-[450px]"
+                        />
+                      
+                        <div class="mt-1.5">
+                          <p class="text-xs text-gray-500">Jabones </p>
+                      
+                          <div class="flex justify-between mt-3 text-sm">
+                            <h3
+                              class="text-gray-900 group-hover:underline group-hover:underline-offset-4"
+                            >
+                              <%= some_products[i].name %>
+                            </h3>
+                      
+                            <p class="text-gray-900">$299</p>
+                          </div>
+                        </div>
+                      </a>
+                <% } %> 
+            </ul>
+        </div>
+    </section>
+
+  
+
+
+
+    <%- include('../templates/footer.ejs') %>

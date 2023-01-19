@@ -13,7 +13,10 @@ class Products {
             error
         } = await Products_model.get_categories()
         if (success) {
-            res.send(data)
+            // res.send(data)
+            res.render('./index/productos.ejs',{
+                title: "Productos - Bouvier Artesanal"
+            })
         } else {
             res.send(error)
         }
@@ -105,6 +108,21 @@ class Products {
         } catch (error) {
             console.log(error)
             res.status(404).send(error)
+        }
+    }
+
+    static async add_product(req,res) {
+        const { name, short_description, category_id, stock, price } = req.body;
+    
+        const { success, data, error } = await Products_model.new_product(name, short_description, category_id, stock, price);
+    
+        if(success){
+            res.send(data)
+        } else {
+            res.sendStatus(404).send({
+                "message": "No se pudo añadir el nuevo producto",
+                error
+            })
         }
     }
 

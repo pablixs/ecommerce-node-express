@@ -11,15 +11,27 @@ class Cart {
         } = req;
         const {
             success,
-            data,
+            data:carrito,
             error
         } = await User_model.get_cart_by_user_id(user[0].id);
-        let products = JSON.parse(data[0].products)
-        res.send({
-            data,
-            products
+        if (success) {
+            let products = JSON.parse(carrito[0].products)
+            console.log(carrito)
+            return res.render('./cart/cart.ejs',{
+                title: "Carrito - Bouvier Artesanal",
+                products,
+                user,
+                carrito
 
-        })
+            })
+        } else {
+            let products = false;
+            return res.render('./cart/cart.ejs',{
+                products,
+                title: "Carrito - Bouvier Artesanal",
+                user
+            })
+        }
     }
 
     static async add_to_cart(req, res) {

@@ -2,9 +2,15 @@
 module.exports = {
   content: ['./views/**/*.ejs'],
   theme: {
-    extend: {},
+    extend: {
+    },
   },
   plugins: [
-    require('flowbite/plugin')
+    require("@tailwindcss/typography"),
+    require('@tailwindcss/forms'),
+    require("daisyui"),
   ],
+  daisyui: {
+    themes: ["garden"]
+  }
 }

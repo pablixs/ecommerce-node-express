@@ -4,6 +4,7 @@ const router = express.Router();
 
 const payment_controller = require('../controllers/payment_controller');
 const passport = require('passport');
+const { payment } = require('mercadopago');
 router.use(passport.initialize());
 require('../middlewares/auth');
 
@@ -56,11 +57,7 @@ router.post('/mercadopago', passport.authenticate('jwt', {session: false}), paym
 
 // })
 
-router.post('/notification', async (req, res ) => {
-    const datos = req.query;
-    console.log(datos)
-    res.status(200).send();
-})
+router.post('/notification/:guid',payment_controller.notification )
 
 router.get('/success', (req, res) => {
     res.render('./users_view/after.ejs', {

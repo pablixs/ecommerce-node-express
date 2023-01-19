@@ -13,20 +13,7 @@ const products_controller = require('../../controllers/products_controllers/prod
 
 //* crud */
 
-router.post('/newproduct', async(req,res) => {
-    const { name, short_description, category_id, stock, price } = req.body;
-
-    const { success, data, error } = await Products.new_product(name, short_description, category_id, stock, price);
-
-    if(success){
-        res.send(data)
-    } else {
-        res.sendStatus(404).send({
-            "message": "No se pudo añadir el nuevo producto",
-            error
-        })
-    }
-})
+router.post('/newproduct', products_controller.add_product)
 
 //*  */
 

@@ -5,9 +5,13 @@ const cookieParser = require('cookie-parser');
 //** controllers */
 const index_controller = require('../controllers/index_controller');
 
+const passport = require('passport');
+router.use(passport.initialize());
+require('../middlewares/auth');
+
 router.use(cookieParser())
 
-router.get('/', index_controller.index);
+router.get('/',index_controller.index);
 
 //* register
 // router.post('/newuser', async(req,res) => {
@@ -43,7 +47,11 @@ router.get('/', index_controller.index);
 
 router.get('/login', index_controller.login);
 
+router.get('/register', index_controller.register)
+
 router.post('/auth/login', index_controller.login_post);
+
+router.post('/auth/register', index_controller.register_post)
 
 router.get('/auth/logout', index_controller.logout);
 

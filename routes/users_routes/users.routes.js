@@ -10,7 +10,7 @@ router.use(passport.initialize());
 
 require('../../middlewares/auth');
 
-router.get('/', passport.authenticate('jwt', { session: false }), user_controller.index)
+router.get('/', passport.authenticate('jwt',{session: false, failureRedirect: '/login'}), user_controller.index)
 
 
 module.exports = router;

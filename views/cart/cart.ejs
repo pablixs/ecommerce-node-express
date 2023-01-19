@@ -1,0 +1,131 @@
+<%- include('../templates/nav.ejs') %>
+
+
+    <section class="pt-16 bg-base-100">
+        <div class="max-w-screen-xl px-4 py-8 mx-auto sm:px-6 sm:py-12 lg:px-8">
+            <div class="max-w-5xl mx-auto">
+                <header class="text-center">
+                    <h1 class="text-xl font-bold  text-gray-900  sm:text-3xl"><span
+                            class="bg-warning bg-opacity-40 px-2 underline">Tu carrito</span></h1>
+                </header>
+                <% if(!products) { %>
+                    <div
+                        class="container flex flex-col items-center justify-center px-5 mx-auto my-8 space-y-8 text-center sm:max-w-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+                            class="w-40 h-40 dark:text-primary">
+                            <path fill="currentColor"
+                                d="M256,16C123.452,16,16,123.452,16,256S123.452,496,256,496,496,388.548,496,256,388.548,16,256,16ZM403.078,403.078a207.253,207.253,0,1,1,44.589-66.125A207.332,207.332,0,0,1,403.078,403.078Z">
+                            </path>
+                            <rect width="176" height="32" x="168" y="320" fill="currentColor"></rect>
+                            <polygon fill="currentColor"
+                                points="210.63 228.042 186.588 206.671 207.958 182.63 184.042 161.37 162.671 185.412 138.63 164.042 117.37 187.958 141.412 209.329 120.042 233.37 143.958 254.63 165.329 230.588 189.37 251.958 210.63 228.042">
+                            </polygon>
+                            <polygon fill="currentColor"
+                                points="383.958 182.63 360.042 161.37 338.671 185.412 314.63 164.042 293.37 187.958 317.412 209.329 296.042 233.37 319.958 254.63 341.329 230.588 365.37 251.958 386.63 228.042 362.588 206.671 383.958 182.63">
+                            </polygon>
+                        </svg>
+                        <p class="text-3xl">Parece que no tenes ningún producto en el carrito :(</p>
+                        <a rel="noopener noreferrer" href="./productos"
+                            class="px-8 py-3 font-semibold rounded dark:bg-primary dark:text-gray-50">Ir a los
+                            productos</a>
+                    </div>
+
+                    <% } else { %>
+                        <div class="mt-8 border border-gray-700 p-4 rounded-xl">
+                            <ul class="space-y-4 ">
+                                <% for(let i=0; i < products.length; i++) { %>
+                                    <li class="flex items-center ">
+                                        <img src="./images/bg03.jpg" alt="" class="object-cover w-64 h-20 rounded" />
+
+                                        <div class="ml-4">
+                                            <h3 class="text-xl text-gray-900">
+                                                <%= products[i].product_name %>
+                                            </h3>
+
+                                            <dl class="mt-0.5 space-y-px text-sm text-gray-600">
+
+                                                <div>
+                                                    <dt class="inline">Cantidad:</dt>
+                                                    <dd class="inline"><%=products[i].product_quantity %>u.</dd>
+                                                </div>
+                                            </dl>
+                                        </div>
+
+                                        <div class="flex items-center justify-end flex-1 gap-2">
+                                            <form>
+                                                <label for="Line1Qty" class="sr-only"> Cantidad </label>
+
+                                                <select type="number" name="quantity" min="1"
+                                                     id="Line1Qty"
+                                                    class="h-10 w-16 rounded border-gray-200 bg-gray-50 p-0 text-center text-xs text-gray-600 [-moz-appearance:_textfield] focus:outline-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none">
+                                                    <option selected disabled value="<%= products[i].product_quantity %>" class="bg-gray-300"><%= products[i].product_quantity %></option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                </select>
+                                                </form>
+
+                                                <button class="text-gray-600 transition hover:text-red-600">
+                                                    <span class="sr-only">Remover producto</span>
+
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                        class="w-4 h-4">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                                                    </svg>
+                                                </button>
+                                        </div>
+                                    </li>
+                                    <div class="divider"></div>
+                                    <% } %>
+                            </ul>
+
+                            <div class="flex justify-end pt-8 mt-8 border-t border-gray-100">
+                                <div class="w-screen max-w-lg space-y-4">
+                                    <dl class="space-y-0.5 text-lg text-gray-700">
+                                        <div class="flex justify-between">
+                                            <dt>Subtotal</dt>
+                                            <dd>$<%= carrito[0].amount%></dd>
+                                        </div>
+
+
+                                        <div class="flex justify-between">
+                                            <dt>Descuento</dt>
+                                            <dd>-$0</dd>
+                                        </div>
+
+                                        <div class="flex justify-between !text-base font-medium">
+                                            <dt>Total</dt>
+                                            <dd>$<%= carrito[0].amount%></dd>
+                                        </div>
+                                    </dl>
+
+                                    <!-- <div class="flex justify-end">
+                                        <span
+                                            class="inline-flex items-center justify-center rounded-full bg-indigo-100 px-2.5 py-0.5 text-indigo-700">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke-width="1.5" stroke="currentColor" class="-ml-1 mr-1.5 h-4 w-4">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M16.5 6v.75m0 3v.75m0 3v.75m0 3V18m-9-5.25h5.25M7.5 15h3M3.375 5.25c-.621 0-1.125.504-1.125 1.125v3.026a2.999 2.999 0 010 5.198v3.026c0 .621.504 1.125 1.125 1.125h17.25c.621 0 1.125-.504 1.125-1.125v-3.026a2.999 2.999 0 010-5.198V6.375c0-.621-.504-1.125-1.125-1.125H3.375z" />
+                                            </svg>
+
+                                            <p class="text-xs whitespace-nowrap">2 Discounts Applied</p>
+                                        </span>
+                                    </div> -->
+
+                                    <div class="flex">
+                                        <a href="#"
+                                            class="flex justify-center w-full px-5 py-3 text-base text-gray-100 transition bg-primary rounded hover:bg-gray-600">
+                                            Hacer pedido
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <% } %>
+            </div>
+        </div>
+    </section>
+
+    <%- include('../templates/footer.ejs') %>

@@ -1,11 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html data-theme="garden" lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= title %> </title>
-    <link rel="stylesheet" href="./styles/output.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    <%= title %>
+  </title>
+  <link rel="stylesheet" href="./styles/output.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
 </head>
+
 <body>
-    
+  <nav
+    class="navbar bg-base-100 bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-40 fixed top-0 left-0 z-10 shadow-lg">
+    <div class="flex-1">
+      <a href="https://instagram.com/bouvierartesanal" target="_blank" class="font btn btn-ghost normal-case text-xl">
+        Bouvier Artesanal
+      </a>
+    </div>
+    <div class="flex-none">
+      <div class=" flex justify-center">
+        <a href="./register" class="btn btn-xs md:btn-sm btn-neutral mx-2">Registrarme</a>
+        <a href="./login" class="btn btn-xs md:btn-sm btn-outline mx-2">Iniciar sesión</a>
+      </div>
+      <div class="dropdown dropdown-end flex items-center px-2">
+        <a href="/carrito" class="btn btn-ghost btn-circle">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+          </svg>
+        </a>
+      </div>
+      <div class="dropdown dropdown-end">
+        <label tabindex="0" class="btn btn-ghost btn-circle avatar">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+            stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+          </svg>
+        </label>
+        <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+          <li><a href="./perfil">Perfil</a></li>
+          <li><a href="./auth/logout">Cerrar sesión</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </nav>
