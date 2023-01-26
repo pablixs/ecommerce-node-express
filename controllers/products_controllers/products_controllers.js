@@ -12,6 +12,7 @@ class Products {
             data,
             error
         } = await Products_model.get_categories()
+        console.log(data)
         if (success) {
             // res.send(data)
             res.render('./index/productos.ejs',{

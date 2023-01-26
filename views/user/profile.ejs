@@ -1,0 +1,100 @@
+<%- include('../templates/nav.ejs') %>
+<div class="flex justify-center items-center 2xl:container 2xl:mx-auto lg:py-16 md:py-12 py-9 px-4 md:px-6 lg:px-20 xl:px-44">
+    <div class="flex w-full sm:w-9/12 lg:w-full flex-col justify-center items-center 2xl:space-x-36 space-y-12 ">
+        <div class="flex w-full flex-col justify-start items-start">
+            <div class="flex flex-col w-full max-w-4xl mx-auto prose text-left prose-blue">
+                <div class="w-full pt-12 mx-auto">
+                    <h1 class="my-0">Bienvenido a tu perfil, <%= user[0].first_name %>.</h1>
+                    <h2 class="mt-4">Aquí podras ver tus ordenes y modificar tus datos personales</h2>
+                </div>
+            </div>
+            
+        </div>
+        <section class="w-full">
+            <div tabindex="0" class="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box">
+                <div class="collapse-title text-xl font-medium">
+                  Haz click aqui para ver tu información.
+                </div>
+                <div class="collapse-content"> 
+                    <div class="mx-auto max-w-4xl">
+                        <h2 class="mb-4 text-xl font-bold ">Mis datos</h2>
+                        <form action="#">
+                            <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
+                                <div class="w-full">
+                                    <label for="name" class="block mb-2 text-lg font-medium ">Nombre</label>
+                                    <input type="text" disabled name="first_name" id="name" value="<%= user[0].first_name %>" class="disabled:bg-gray-300 hover:cursor-not-allowed bg-gray-50 border border-gray-300 text-lg rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 " required="">
+                                </div>
+                                <div class="w-full">
+                                    <label for="last_name" class="block mb-2 text-lg font-medium ">Apellido</label>
+                                    <input type="text" disabled name="last_name" id="last_name" value="<%= user[0].last_name %>" class="disabled:bg-gray-300 hover:cursor-not-allowed bg-gray-50 border border-gray-300 text-lg rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 " required="">
+                                </div> 
+                                <div class="w-full">
+                                    <label for="email" class="block mb-2 text-lg font-medium ">Email</label>
+                                    <input type="text" disabled name="email" id="email" value="<%= user[0].email %>" class="disabled:bg-gray-300 hover:cursor-not-allowed bg-gray-50 border border-gray-300 text-lg rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 " required="">
+                                </div> 
+                                <div class="w-full">
+                                    <label for="phone" class="block mb-2 text-lg font-medium ">Teléfono(WhatsApp)</label>
+                                    <input type="number" disabled name="phone" id="phone" value="<%= user[0].phone %>" class="disabled:bg-gray-300 hover:cursor-not-allowed bg-gray-50 border border-gray-300 text-lg rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 " required="">
+                                </div> 
+                                <div class="sm:col-span-2">
+                                    <label for="description" class="block  mb-2 text-lg font-medium text-gray-900 ">Description</label>
+                                    <textarea id="description" disabled rows="8" class="block disabled:bg-gray-300 hover:cursor-not-allowed p-2.5 w-full text-lg text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 " placeholder="Your description here"></textarea>
+                                </div>
+                            </div>
+                            <button type="submit" class="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
+                                Add product
+                            </button>
+                        </form>
+                    </div>
+                </div>
+              </div>
+            
+        </section>
+        <h3 class="text-3xl font-semibold">Mis ordenes:</h3>
+        <% if(orders !== false) {%> 
+            <% for( let i = 0; i < orders.length; i++) {%>
+                <a href="http://localhost:3000/perfil/orden/00000<%=orders[i].id%>" class="flex flex-col justify-start border border-dashed border-gray-800 rounded-xl hover:bg-primary transition-colors items-start w-full p-6 md:p-14">
+                    <div class="flex flex-col sm:flex-row w-full justify-between">
+                        <h3 class="text-2xl  font-semibold leading-6"># Número de orden: <%=  orders[i].id %>.</h3>
+                        <h3 class="text-2xl mt-4 sm:mt-0 font-semibold leading-6">
+                        Estado: 
+                            <% switch(orders[i].status) { 
+                                case 'pending': %>  
+                            <span class="text-warning">Pendiente</span>
+                            <% break; 
+                                case 'accepted': %>
+                                Aprobado
+                            <% break;
+                                default:
+                                Pendientex
+                            break;  } %> 
+                    </h3>
+                    </div>
+                    <% let products = JSON.parse(orders[i].products)  %>
+                    <div class="flex flex-col w-full justify-start my-4">
+                        <h3 class="text-xl  font-semibold leading-6">Productos: </h3>
+                        <% for( let i = 0; i < products.length; i++){ %> 
+                            <ul class="flex justify-between w-full items-center ">
+                                <li class="text-lg">
+                                    <%= products[i].product_name%>
+                                </li>                                
+                                <li class="text-lg">
+                                    $ <%= products[i].product_price%>
+                                </li>                                
+                            </ul>
+                        <% }%> 
+                    </div>
+                    <div class="flex justify-between w-full items-center mt-12">
+                        <p class="text-xl font-semibold leading-4">Total estimado</p>
+                        <p class="text-lg font-semibold leading-4">$<%= orders[i].total%></p>
+                    </div> 
+                </a>
+            <% } %> 
+        <% } else { %> 
+        <% } %> 
+
+    </div>
+</div>
+
+
+<%- include('../templates/footer.ejs') %>

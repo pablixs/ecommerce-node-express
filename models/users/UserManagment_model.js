@@ -157,6 +157,98 @@ class UserManagment {
             }
         }
     }
+
+    static async create_order(keys, values){
+        try {
+            const data = await query(`INSERT INTO orders(${keys.join(', ')}) VALUES(?)`,[values])
+            if(data.length === 0){
+                return {
+                    success: false,
+                    error: 'No se pudo crear la orden. Intenta nuevamente'
+                }
+            }
+            return {
+                success: true,
+                data,
+                error: false
+            }
+
+        } catch (error) {
+            return {
+                success: false,
+                error
+            }
+        }
+    }
+
+    static async emtpy_cart_when_order_by_user_id(user_id){
+        try {
+            let empty = null;
+            const data = await query('UPDATE user_cart SET products = ?, amount = 0 WHERE user_id = ?',[empty,user_id])
+            if(data.lenght === 0){
+                return {
+                    success: false,
+                    error: 'No se pudo actualizar el estado final del carrito'
+                }
+            }
+            return {
+                success: true,
+                data,
+                error: false,
+            }
+        } catch (error) {
+            return {
+                success: false,
+                error
+            }
+        }
+    }
+
+    static async get_orders_by_user_id(user_id){
+        try {
+            const data = await query('SELECT * FROM orders WHERE user_id = ?',[user_id]);
+            if(data.length === 0){
+                return {
+                    success: false,
+                    error: 'No se encontraron ordenes para ese usuario'
+                }
+            }
+            return {
+                success: true,
+                data,
+                error:false
+            }
+        } catch (error) {
+            return {
+                success: false,
+                error
+            }
+        }
+    }
+
+    static async get_orders_by_id(id){
+        try {
+            const data = await query('SELECT * FROM orders WHERE id = ?',[id]);
+            if(data.length === 0 || data === undefined){
+                return {
+                    success: false,
+                    error: 'No se encontro esa orden'
+                }
+            }
+            return {
+                success: true,
+                data,
+                error:false
+            }
+        } catch (error) {
+            return {
+                success: false,
+                error
+            }
+        }
+    }
+
+
 }
 
 module.exports = UserManagment

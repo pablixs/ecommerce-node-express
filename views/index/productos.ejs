@@ -1,3 +1,87 @@
 <%- include('../templates/nav.ejs') %>
-<h1>hola</h1>
+
+
+<section class="container md:max-w-full flex flex-col py-10 mx-0">
+    <div class="2xl:container flex justify-center items-center w-full 2xl:mx-auto lg:px-20 md:pt-12 md:px-6 pt-9 px-4">
+        <div class="w-80 md:w-auto grid lg:grid-cols-3 grid-cols-1 lg:gap-8 gap-6">
+            <div class="relative group">
+                <img class="lg:block hidden w-full" src="./images/bg03.jpg" alt="Women" />
+                <img class="lg:hidden md:block hidden w-full" src="./images/bg03.jpg" alt="Women" />
+                <img class="w-full md:hidden" src="./images/bg03.jpg" alt="Women" />
+    
+                <div class="opacity-0 bg-gradient-to-t from-gray-800 via-gray-800 to-opacity-30 group-hover:opacity-50 absolute top-0 left-0 h-full w-full"></div>
+                <div class="absolute top-0 left-0 w-full h-full flex justify-start items-end opacity-0 hover:opacity-100 p-8">
+                    <p class="font-semibold text-2xl leading-6 text-white">Women</p>
+                </div>
+            </div>
+    
+            <div class="lg:px-6 lg:py-0 md:py-16 md:px-24 py-16 px-6 flex flex-col justify-center items-center text-center bg-gray-100 dark:bg-gray-800">
+                <h2 class="dark:text-white font-semibold lg:text-4xl text-3xl lg:leading-10 leading-9 text-gray-800 lg:w-full md:w-7/12 w-full">Shop your Favourite Designers</h2>
+                <p class="dark:text-gray-300 font-medium text-base leading-6 text-gray-600 mt-4 lg:w-full md:w-7/12 w-full">We offer a huge colletion of premium clothing that are crafted with excellence for our adored customers</p>
+                <button class="dark:bg-white dark:text-gray-800 dark:hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 hover:bg-gray-700 text-white text-base leading-4 bg-gray-800 lg:px-10 py-4 lg:w-auto w-72 mt-16">Discover More</button>
+            </div>
+    
+            <div class="relative group">
+                <img class="lg:block hidden w-full" src="./images/bg03.jpg" alt="Man" />
+                <img class="lg:hidden md:block hidden w-full" src="./images/bg03.jpg" alt="Man" />
+                <img class="w-full md:hidden" src="./images/bg03.jpg" alt="Man" />
+    
+                <div class="opacity-0 bg-gradient-to-t from-gray-800 via-gray-800 to-opacity-30 group-hover:opacity-50 absolute top-0 left-0 h-full w-full"></div>
+                <div class="absolute top-0 left-0 w-full h-full flex justify-start items-end opacity-0 hover:opacity-100 p-8">
+                    <p class="font-semibold text-2xl leading-6 text-white">Men</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <div class="flex justify-center items-center">
+        <div class="2xl:mx-auto 2xl:container py-12 px-4 sm:px-6 xl:px-20 2xl:px-0 w-full">
+            <div class="flex flex-col jusitfy-center items-center space-y-10">
+                <div class="flex flex-col justify-center items-center ">
+                    <h1 class="text-3xl xl:text-4xl font-semibold leading-7 xl:leading-9 text-gray-800 dark:text-white">Shop By Category</h1>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-x-4 md:gap-x-8 w-full">
+                    <div class="relative group flex justify-center items-center h-full w-full">
+                        <img class="object-center object-cover h-full w-full" src="./images/bg02.jpg" alt="girl-image" />
+                        <button class="dark:bg-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 bottom-4 z-10 absolute text-base font-medium leading-none text-gray-800 py-3 w-36 bg-white">Women</button>
+                        <div class="absolute opacity-0 group-hover:opacity-100 transition duration-500 bottom-3 py-6 z-0 px-20 w-36 bg-white bg-opacity-50"></div>
+                    </div>
+    
+                    <div class="flex flex-col space-y-4 md:space-y-8 mt-4 md:mt-0">
+                        <div class="relative group flex justify-center items-center h-full w-full">
+                            <img class="object-center object-cover h-full w-full" src="./images/bg02.jpg" alt="shoe-image" />
+                            <button class="dark:bg-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 bottom-4 z-10 absolute text-base font-medium leading-none text-gray-800 py-3 w-36 bg-white">Shoes</button>
+                            <div class="absolute opacity-0 group-hover:opacity-100 transition duration-500 bottom-3 py-6 z-0 px-20 w-36 bg-white bg-opacity-50"></div>
+                        </div>
+                        <div class="relative group flex justify-center items-center h-full w-full">
+                            <img class="object-center object-cover h-full w-full" src="./images/bg02.jpg" alt="watch-image" />
+                            <button class="dark:bg-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 bottom-4 z-10 absolute text-base font-medium leading-none text-gray-800 py-3 w-36 bg-white">Watches</button>
+                            <div class="absolute opacity-0 group-hover:opacity-100 transition duration-500 bottom-3 py-6 z-0 px-20 w-36 bg-white bg-opacity-50"></div>
+                        </div>
+                    </div>
+    
+                    <div class="relative group justify-center items-center h-full w-full hidden lg:flex">
+                        <img class="object-center object-cover h-full w-full" src="./images/bg02.jpg" alt="girl-image" />
+                        <button class="dark:bg-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 bottom-4 z-10 absolute text-base font-medium leading-none text-gray-800 py-3 w-36 bg-white">Accessories</button>
+                        <div class="absolute opacity-0 group-hover:opacity-100 transition duration-500 bottom-3 py-6 z-0 px-20 w-36 bg-white bg-opacity-50"></div>
+                    </div>
+                    <div class="relative group flex justify-center items-center h-full w-full mt-4 md:hidden md:mt-8 lg:hidden">
+                        <img class="object-center object-cover h-full w-full hidden md:block" src="./images/bg02.jpg" alt="girl-image" />
+                        <img class="object-center object-cover h-full w-full md:hidden" src="./images/bg02.jpg" alt="olive-tatiane-Im-Ez-F9-B91-Mk-unsplash-2" />
+                        <button class="dark:bg-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 bottom-4 z-10 absolute text-base font-medium leading-none text-gray-800 py-3 w-36 bg-white">Accessories</button>
+                        <div class="absolute opacity-0 group-hover:opacity-100 transition duration-500 bottom-3 py-6 z-0 px-20 w-36 bg-white bg-opacity-50"></div>
+                    </div>
+                </div>
+                <div class="relative group hidden md:flex justify-center items-center h-full w-full mt-4 md:mt-8 lg:hidden">
+                    <img class="object-center object-cover h-full w-full hidden md:block" src="./images/bg02.jpg" alt="girl-image" />
+                    <img class="object-center object-cover h-full w-full sm:hidden" src="./images/bg02.jpg" alt="olive-tatiane-Im-Ez-F9-B91-Mk-unsplash-2" />
+                    <button class="dark:bg-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-400 bottom-4 z-10 absolute text-base font-medium leading-none text-gray-800 py-3 w-36 bg-white">Accessories</button>
+                    <div class="absolute opacity-0 group-hover:opacity-100 transition duration-500 bottom-3 py-6 z-0 px-20 w-36 bg-white bg-opacity-50"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <%- include('../templates/footer.ejs') %>

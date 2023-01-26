@@ -10,7 +10,9 @@ router.use(passport.initialize());
 
 require('../../middlewares/auth');
 
-router.get('/', passport.authenticate('jwt',{session: false, failureRedirect: '/login'}), user_controller.index)
+router.get('/', passport.authenticate('jwt',{session: false, failureRedirect: '/login'}), user_controller.index);
+
+router.get('/orden/00000:order_id', passport.authenticate('jwt',{session:false, failureRedirect: '/login'}), user_controller.get_order_by_id)
 
 
 module.exports = router;

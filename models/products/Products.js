@@ -21,7 +21,7 @@ class Products {
             }
         }
     }
-    
+
     static async get_product_by_category(id) {
         const data = await query('SELECT * FROM products WHERE category_id = ?', [id]);
         try {
@@ -87,16 +87,38 @@ class Products {
         }
     }
 
-    static async get_randoms_products(quantity){
+    static async get_randoms_products(quantity) {
         try {
-            const data = await query('SELECT * FROM products ORDER BY RAND() LIMIT ?',[quantity]);
-            if(data.length === 0) {
+            const data = await query('SELECT * FROM products ORDER BY RAND() LIMIT ?', [quantity]);
+            if (data.length === 0) {
                 return {
                     success: false,
                     error: 'No se pudieron encontrar los productos.'
                 }
             }
 
+            return {
+                success: true,
+                data
+            }
+        } catch (error) {
+            return {
+                success: false,
+                error
+            }
+        }
+    }
+
+    static async change_stock_products(product_quantity, product_id) {
+        try {
+            const data = await query('UPDATE products SET stock = stock - ? WHERE id = ?', [product_quantity, product_id])
+            if (data.length === 0 || data.affectedRows === 0 ) {
+                return {
+                    success: false,
+                    error: 'No se pudo restar el stock de ese producto.'
+                }
+            }
+            
             return {
                 success: true,
                 data

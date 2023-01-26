@@ -1,11 +1,14 @@
 const User_model = require('../models/users/UserManagment_model');
-const Product_model = require('../models/products/Products')
-const cart_helper = require('../helpers/cart_helper')
+const Product_model = require('../models/products/Products');
+const cart_helper = require('../helpers/cart_helper');
+const mail_helper = require('../helpers/mail_helper');
 
 
 class Cart {
 
     static async index(req, res) {
+        let errorMessage = '';
+        errorMessage = req.query?.error;
         const {
             user
         } = req;
@@ -21,8 +24,8 @@ class Cart {
                 title: "Carrito - Bouvier Artesanal",
                 products,
                 user,
-                carrito
-
+                carrito,
+                errorMessage
             })
         } else {
             let products = false;
@@ -212,6 +215,84 @@ class Cart {
 
         } catch (error) {
             res.status(404).send(error)
+        }
+    }
+    
+    static async create_order(req,res) {
+        try {
+            let errorMessage = '';
+            const { user } = req;
+            const { success, data:cart, error } = await User_model.get_cart_by_user_id(user[0].id) 
+            if(success){
+                const cart_stock = await JSON.parse(cart[0].products);
+                for (let i = 0; i < cart_stock.length; i++) {
+                    console.log(cart_stock[i])
+                    if (await cart_helper.detect_stock(cart_stock[i]) !== true) {
+                        errorMessage = 'No hay suficiente stock de ese producto'
+                        return res.redirect(`../carrito?error=${errorMessage}`)
+                    }
+                }
+                
+
+                for (let i = 0; i < cart_stock.length; i++) {
+                    if(await cart_helper.remove_stock_quantity(cart_stock[i].product_quantity, cart_stock[i].product_id) !== true){
+                       return res.status(404).send('No se pudo descontar el stock')
+                    };
+                   }
+
+                let order_items = {
+                    user_id: user[0].id,
+                    // method: req.body.method,
+                    products: cart[0].products,
+                    total: cart[0].amount,
+                }
+
+                let order_keys = Object.keys(order_items);
+                let order_values = Object.values(order_items)
+
+                
+                const { success:success_two, data:order_created, error:error_two } = await User_model.create_order(order_keys, order_values);
+                if(success_two){
+                    const { success:success_three, data:cart_updated, error:error_three } = await User_model.emtpy_cart_when_order_by_user_id(user[0].id)
+                    if(success_three){
+                        const { success: success_mail, data:mail_data, error:error_mail } = await mail_helper.order_created(user[0].email);                  
+
+                        if(success_mail){
+
+                            
+
+
+                            console.log(
+                                order_created,
+                                cart_updated,
+                                mail_data
+                            )   
+                            return res.redirect(`../perfil/orden/00000${order_created.insertId}`)
+                        } else {
+                            return res.status(404).send({
+                                error: error_mail,
+                                message: 'No se pudo enviar el mail'
+                            })
+                        }
+
+                    } else {
+                        console.log(error_three)
+                        return res.status(403).send('No se pudo crear la orden')
+                    }
+                } else {
+                    console.log(error_two)
+                    return res.status(404).send('No se pudo crear la orden.')
+                }
+
+            } else {
+                return res.status(404).send('No se encontró un carrito con ese id');
+            }
+        } catch (error) {
+            console.log(error)
+            res.status(404).send({
+                message: 'Algo salió mal',
+                error
+            })
         }
     }
 }

@@ -14,7 +14,6 @@ class Index {
             const { success,data: categories,error } = await Product_model.get_categories();
             const { success: success_two, data: some_products, error: error_two } = await Product_model.get_randoms_products(6)
             // res.send({"message":"Welcome to Bouvier Artesanal"})
-            
             if (success && success_two) {
                 res.render('./index/index.ejs', {
                     title: "Bouvier Artesanal - Cosmética Natural",

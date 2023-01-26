@@ -56,9 +56,24 @@ async function detect_stock(product){
     }
 }
 
+async function remove_stock_quantity(product_quantity, product_id){
+    console.log('!!!!!')
+    console.log(product_quantity)
+    console.log(product_id)
+    console.log('!!!!!')
+    const { success, data:product_stock_changed, error } = await Product_model.change_stock_products(product_quantity, product_id);
+    console.log(product_stock_changed)
+    if(success){
+        return true
+    } else {
+        return false;
+    }
+}
+
 // module.exports = is_product_in_cart, calculate_amount;
 exports.is_product_in_cart = is_product_in_cart;
 exports.calculate_amount = calculate_amount;
 exports.add_if_is_in_cart = add_if_is_in_cart;
 exports.detect_product_in_the_cart = detect_product_in_the_cart;
 exports.detect_stock = detect_stock;
+exports.remove_stock_quantity = remove_stock_quantity;

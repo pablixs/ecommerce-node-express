@@ -10,6 +10,7 @@ const user_router = require('./routes/users_routes/users.routes');
 const products_router = require('./routes/products_routes/products.routes');
 const cart_router = require('./routes/carrito.routes');
 const payments_router = require('./routes/payment.routes');
+const mail_router = require('./routes/mail.routes');
 
 //* dev
 const testRouter = require('./routes/test');
@@ -32,6 +33,7 @@ app.use('/perfil', user_router);
 app.use('/productos', products_router);
 app.use('/carrito', cart_router);
 app.use('/pagar', payments_router)
+app.use('/mail', mail_router);
 //* dev
 app.use('/api', testRouter);
 
