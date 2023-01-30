@@ -1,12 +1,12 @@
 const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
-    host: 'mail.bouvierartesanal.com.ar',
+    host: 'your.mail.com',
     port: 465,
     secure: true,
     auth: {
-        user: 'info@bouvierartesanal.com.ar',
-        pass: 'Hachigatsujuunana147258!'
+        user: 'your-user',
+        pass: 'your-pw'
     }
 });
 
