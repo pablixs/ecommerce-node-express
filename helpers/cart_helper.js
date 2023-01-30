@@ -18,27 +18,27 @@ function detect_product_in_the_cart(cart, product_id){
     return false;
 }
 
-function add_if_is_in_cart(cart, product){
-    for(let i = 0; i < cart.length; i++){
-        if (cart[i].product_id === product.product_id){
-            let add_new = {
-                product_id: product.product_id,
-                product_name: product.product_name,
-                product_price: cart[i].product_price + product.product_price * product.product_quantity,
-                product_quantity: product.product_quantity + cart[i].product_quantity
-            }
-            cart.splice(cart.indexOf(i), 1);
-            console.log(cart)
-            return cart.push(add_new)
-        }
+function add_if_is_in_cart(cart, product_body){
+    let index = cart.findIndex(product => product.product_id === product_body.product_id);
+
+    let add_new = {
+        product_id: product_body.product_id,
+        product_name: product_body.product_name,
+        product_price: cart[index].product_price + product_body.product_price * product_body.product_quantity,
+        product_quantity: product_body.product_quantity + cart[index].product_quantity
     }
+
+    if(index !== -1){
+       return cart.splice(index, 1, add_new)
+    }
+
 }
 
 function calculate_amount(cart) {
     amount = 0;
     for (let i = 0; i < cart.length; i++) {
         if (cart[i].product_price) {
-            amount += (cart[i].product_price);
+            amount += (cart[i].product_price) * cart[i].product_quantity;
         }
     }
     return amount;

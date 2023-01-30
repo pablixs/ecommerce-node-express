@@ -14,5 +14,7 @@ router.get('/', passport.authenticate('jwt',{session: false, failureRedirect: '/
 
 router.get('/orden/00000:order_id', passport.authenticate('jwt',{session:false, failureRedirect: '/login'}), user_controller.get_order_by_id)
 
+router.post('/orden/continue', passport.authenticate('jwt', { session: false }), user_controller.order_continue)
+
 
 module.exports = router;

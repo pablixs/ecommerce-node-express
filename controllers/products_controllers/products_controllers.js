@@ -7,19 +7,25 @@ const handleQueryResult = require('../../helpers/handleQueryResult');
 class Products {
 
     static async index(req, res) {
-        const {
-            success,
-            data,
-            error
-        } = await Products_model.get_categories()
-        console.log(data)
-        if (success) {
-            // res.send(data)
-            res.render('./index/productos.ejs',{
-                title: "Productos - Bouvier Artesanal"
-            })
-        } else {
-            res.send(error)
+        try {
+            let errorMessage = '';
+            errorMessage = req.query?.error;
+            const {
+                success,
+                data,
+                error
+            } = await Products_model.get_categories()
+            console.log(data)
+            if (success) {
+                // res.send(data)
+                res.render('./index/productos.ejs',{
+                    title: "Productos - Bouvier Artesanal"
+                })
+            } else {
+                res.send(error)
+            }
+        } catch (error) {
+            return res.status(400).send({error})
         }
     }
 
@@ -64,6 +70,8 @@ class Products {
 
     static async category_product(req, res) {
         try {
+            let errorMessage = '';
+            errorMessage = req.query?.error;
             const {
                 success,
                 data: categories,
@@ -92,10 +100,19 @@ class Products {
                 const final_product = product_handled.findIndex(product_handled => product_handled.name_url === query_product);
 
                 if(final_product !== -1) { 
-                    res.status(200).send({
+
+                    res.render('./products/product.ejs',{
+                        title: product_handled[final_product].name,
+                        producto: product_handled[final_product],
+                        categoria: categories[coincidences],
+                        errorMessage
+                    })
+
+                    console.log({
                     'Esta es la categoria que coincide': categories[coincidences],
                     'Estos son los productos que coinciden con la url': product_handled[final_product]
-                })} else {
+                })
+                } else {
 
                     res.status(404).send('No se encontró un producto con ese url')
                 }

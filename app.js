@@ -12,13 +12,14 @@ const cart_router = require('./routes/carrito.routes');
 const payments_router = require('./routes/payment.routes');
 const mail_router = require('./routes/mail.routes');
 
+
 //* dev
 const testRouter = require('./routes/test');
 
 var app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, './views'));
 app.set('view engine', 'ejs');
 
 app.use(helmet())
@@ -26,7 +27,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, './public')));
 
 app.use('/', index_router);
 app.use('/perfil', user_router);

@@ -248,6 +248,26 @@ class UserManagment {
         }
     }
 
+    static async set_step_two_order_bv_user_id(payment_method, province, localidad, address_line1, address_line2, postal_code, envio_type, user_id, order_id){
+        try {
+            const data = await query('UPDATE orders SET payment_method = ?, province = ?, localidad = ?, address_line1 = ?, address_line2 = ?, postal_code = ?, envio_type = ?, current_step = 2 WHERE user_id = ? AND id = ?',[payment_method, province, localidad, address_line1, address_line2, postal_code, envio_type,user_id, order_id])
+            if (data.length === 0 || data.affectedRows === 0 ) {
+                return {
+                    success: false,
+                    error: 'No se pudo actualizar la orden.'
+                }
+            }
+            return {
+                success: true,
+                data
+            }
+        } catch (error) {
+            return {
+                success: false,
+                error
+            }
+        }
+    }
 
 }
 
